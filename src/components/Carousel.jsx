@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import SlideMain from "./SlideMain";
 import SlideInfo1 from "./SlideInfo1";
 import SlideInfo2 from "./SlideInfo2";
+import TopRightMenu from "./TopRightMenu";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function Carousel() {
@@ -43,8 +44,9 @@ function Carousel() {
 
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-white relative overflow-hidden">
+            <TopRightMenu />
             {/* 원형 슬라이드 영역 */}
-            <div className="w-[135vh] h-[135vh] rounded-full border-[124px] border-[#f6f6f6] shadow-xl overflow-hidden flex items-center justify-center z-0 relative">
+            <div className="w-[133vh] h-[133vh] rounded-full border-[105px] border-[#f6f6f6] shadow-xl overflow-hidden flex items-center justify-center z-0 relative">
                 {/* 슬라이드 묶음 */}
                 <div
                     className="flex w-full h-full"
@@ -74,7 +76,7 @@ function Carousel() {
             {/* 오른쪽 화살표 버튼 */}
             <button
                 onClick={nextSlide}
-                className="absolute top-1/2 left-1/2 -translate-y-1/2 translate-x-[calc(50%+calc(67.5px+45vh))]
+                className="absolute top-1/2 left-1/2 -translate-y-1/2 translate-x-[calc(50%+calc(67.5px+46vh))]
            w-[135px] h-[135px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
            hover:scale-110 transition-transform duration-300 active:scale-95"
             >
