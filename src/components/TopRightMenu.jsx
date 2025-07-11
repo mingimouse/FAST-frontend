@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Menu } from "lucide-react";
 
-function TopRightMenu() {
+function TopRightMenu({ onLoginClick }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // ← 임시 로그인 상태
     const dropdownRef = useRef(null);
@@ -31,7 +31,13 @@ function TopRightMenu() {
             <button
                 className="text-2xl font-medium px-0 py-4 rounded-md hover:text-blue-600 hover:font-bold transition-all"
                 aria-label={isLoggedIn ? "로그아웃" : "로그인"}
-                onClick={() => setIsLoggedIn(!isLoggedIn)} // ← 임시 토글
+                onClick={() => {
+                    if (isLoggedIn) {
+                        setIsLoggedIn(false); // 로그아웃
+                    } else {
+                        onLoginClick(); // 🔥 모달 열기
+                    }
+                }}
             >
                 {isLoggedIn ? "로그아웃" : "로그인"}
             </button>

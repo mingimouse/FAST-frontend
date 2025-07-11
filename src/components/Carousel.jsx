@@ -5,15 +5,16 @@ import SlideInfo2 from "./SlideInfo2";
 import TopRightMenu from "./TopRightMenu";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-function Carousel() {
+// ✅ onLoginClick을 props로 받음
+function Carousel({ onLoginClick }) {
     const rawSlides = [<SlideMain />, <SlideInfo1 />, <SlideInfo2 />];
     const slides = [
-        rawSlides[rawSlides.length - 1], // 맨 앞에 마지막 슬라이드 복제
+        rawSlides[rawSlides.length - 1],
         ...rawSlides,
-        rawSlides[0], // 맨 뒤에 첫 번째 슬라이드 복제
+        rawSlides[0],
     ];
 
-    const [current, setCurrent] = useState(1); // 시작 위치는 실제 첫 슬라이드
+    const [current, setCurrent] = useState(1);
     const [isAnimating, setIsAnimating] = useState(false);
 
     const nextSlide = () => {
@@ -33,21 +34,21 @@ function Carousel() {
             setIsAnimating(false);
 
             if (current === slides.length - 1) {
-                setCurrent(1); // 마지막 → 첫 슬라이드로 점프
+                setCurrent(1);
             } else if (current === 0) {
-                setCurrent(slides.length - 2); // 처음 → 마지막 슬라이드로 점프
+                setCurrent(slides.length - 2);
             }
-        }, 700); // transition 시간과 맞춤
+        }, 700);
 
         return () => clearTimeout(timeout);
     }, [current]);
 
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-white relative overflow-hidden">
-            <TopRightMenu />
-            {/* 원형 슬라이드 영역 */}
+            {/* ✅ TopRightMenu에 onLoginClick 전달 */}
+            <TopRightMenu onLoginClick={onLoginClick} />
+
             <div className="w-[133vh] h-[133vh] rounded-full border-[105px] border-[#f6f6f6] shadow-xl overflow-hidden flex items-center justify-center z-0 relative">
-                {/* 슬라이드 묶음 */}
                 <div
                     className="flex w-full h-full"
                     style={{
@@ -67,8 +68,8 @@ function Carousel() {
             <button
                 onClick={prevSlide}
                 className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-[calc(50%+calc(67.5px+60vh))]
-           w-[155px] h-[155px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
-           hover:scale-110 transition-transform duration-300 active:scale-95"
+                w-[155px] h-[155px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
+                hover:scale-110 transition-transform duration-300 active:scale-95"
             >
                 <ChevronLeft className="w-24 h-24 text-blue-600" strokeWidth={3} />
             </button>
@@ -77,12 +78,11 @@ function Carousel() {
             <button
                 onClick={nextSlide}
                 className="absolute top-1/2 left-1/2 -translate-y-1/2 translate-x-[calc(50%+calc(67.5px+44vh))]
-           w-[155px] h-[155px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
-           hover:scale-110 transition-transform duration-300 active:scale-95"
+                w-[155px] h-[155px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
+                hover:scale-110 transition-transform duration-300 active:scale-95"
             >
                 <ChevronRight className="w-24 h-24 text-blue-600" strokeWidth={3} />
             </button>
-
         </div>
     );
 }
