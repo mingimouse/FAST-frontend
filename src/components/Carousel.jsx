@@ -67,20 +67,20 @@ function Carousel() {
             <button
                 onClick={prevSlide}
                 className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-[calc(50%+calc(67.5px+60vh))]
-           w-[135px] h-[135px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
+           w-[155px] h-[155px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
            hover:scale-110 transition-transform duration-300 active:scale-95"
             >
-                <ChevronLeft className="w-20 h-20 text-blue-600" strokeWidth={3} />
+                <ChevronLeft className="w-24 h-24 text-blue-600" strokeWidth={3} />
             </button>
 
             {/* 오른쪽 화살표 버튼 */}
             <button
                 onClick={nextSlide}
-                className="absolute top-1/2 left-1/2 -translate-y-1/2 translate-x-[calc(50%+calc(67.5px+46vh))]
-           w-[135px] h-[135px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
+                className="absolute top-1/2 left-1/2 -translate-y-1/2 translate-x-[calc(50%+calc(67.5px+44vh))]
+           w-[155px] h-[155px] rounded-full bg-white shadow-lg flex items-center justify-center z-50
            hover:scale-110 transition-transform duration-300 active:scale-95"
             >
-                <ChevronRight className="w-20 h-20 text-blue-600" strokeWidth={3} />
+                <ChevronRight className="w-24 h-24 text-blue-600" strokeWidth={3} />
             </button>
 
         </div>
