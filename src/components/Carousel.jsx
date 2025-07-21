@@ -48,7 +48,7 @@ function Carousel({ onLoginClick }) {
             {/* ✅ TopRightMenu에 onLoginClick 전달 */}
             <TopRightMenu onLoginClick={onLoginClick} />
 
-            <div className="w-[133vh] h-[133vh] rounded-full border-[105px] border-[#f6f6f6] shadow-xl overflow-hidden flex items-center justify-center z-0 relative">
+            <div className="w-[133vh] h-[133vh] rounded-full border-[7vw] border-[#f6f6f6] shadow-xl overflow-hidden flex items-center justify-center z-0 relative">
                 <div
                     className="flex w-full h-full"
                     style={{

@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Menu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-function TopRightMenu({ onLoginClick }) {
+function TopRightMenu({ onLoginClick, showLoginButton = true }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // ← 임시 로그인 상태
     const dropdownRef = useRef(null);
+    const navigate = useNavigate();
 
     // 외부 클릭 시 메뉴 닫기
     useEffect(() => {
@@ -27,20 +29,22 @@ function TopRightMenu({ onLoginClick }) {
 
     return (
         <div className="absolute top-5 right-12 z-50 flex items-center gap-10">
-            {/* 로그인 / 로그아웃 버튼 */}
-            <button
-                className="text-2xl font-medium px-0 py-4 rounded-md hover:text-blue-600 hover:font-bold transition-all"
-                aria-label={isLoggedIn ? "로그아웃" : "로그인"}
-                onClick={() => {
-                    if (isLoggedIn) {
-                        setIsLoggedIn(false); // 로그아웃
-                    } else {
-                        onLoginClick(); // 🔥 모달 열기
-                    }
-                }}
-            >
-                {isLoggedIn ? "로그아웃" : "로그인"}
-            </button>
+            {/* 로그인 / 로그아웃 버튼 (조건부 렌더링) */}
+            {showLoginButton && (
+                <button
+                    className="text-2xl font-medium px-0 py-4 rounded-md hover:text-blue-600 hover:font-bold transition-all"
+                    aria-label={isLoggedIn ? "로그아웃" : "로그인"}
+                    onClick={() => {
+                        if (isLoggedIn) {
+                            setIsLoggedIn(false); // 로그아웃
+                        } else {
+                            onLoginClick(); // 🔥 모달 열기
+                        }
+                    }}
+                >
+                    {isLoggedIn ? "로그아웃" : "로그인"}
+                </button>
+            )}
 
             {/* 메뉴 아이콘과 드롭다운 */}
             <div className="relative" ref={dropdownRef}>
@@ -60,6 +64,7 @@ function TopRightMenu({ onLoginClick }) {
                             My 검사결과
                         </button>
                         <button
+                            onClick={() => navigate("/stroke-center")}
                             className="text-2xl hover:text-blue-600 hover:font-bold transition-all whitespace-nowrap"
                             aria-label="뇌졸중 센터 찾기"
                         >
