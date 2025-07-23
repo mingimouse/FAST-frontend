@@ -45,8 +45,8 @@ function Carousel({ onLoginClick }) {
 
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-white relative overflow-hidden">
-            {/* ✅ TopRightMenu에 onLoginClick 전달 */}
-            <TopRightMenu onLoginClick={onLoginClick} />
+            {/* ✅ 홈에서는 홈버튼 숨김 */}
+            <TopRightMenu onLoginClick={onLoginClick} showHomeButton={false} />
 
             <div className="w-[133vh] h-[133vh] rounded-full border-[7vw] border-[#f6f6f6] shadow-xl overflow-hidden flex items-center justify-center z-0 relative">
                 <div
