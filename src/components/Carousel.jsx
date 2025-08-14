@@ -1,21 +1,34 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SlideMain from "./SlideMain";
 import SlideInfo1 from "./SlideInfo1";
 import SlideInfo2 from "./SlideInfo2";
 import TopRightMenu from "./TopRightMenu";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// ✅ onLoginClick을 props로 받음
 function Carousel({ onLoginClick }) {
-    const rawSlides = [<SlideMain />, <SlideInfo1 />, <SlideInfo2 />];
+    const navigate = useNavigate();
+
+    const handleStartTest = () => {
+        navigate("/test");
+    };
+
+    // 실제 슬라이드
+    const rawSlides = [
+        <SlideMain onStart={handleStartTest} key="main" />,
+        <SlideInfo1 key="info1" />,
+        <SlideInfo2 key="info2" />,
+    ];
+
+    // 복제 포함한 무한 슬라이드 구성
     const slides = [
-        rawSlides[rawSlides.length - 1],
+        <SlideInfo2 key="clone-start" />, // 맨 앞 복제
         ...rawSlides,
-        rawSlides[0],
+        <SlideMain onStart={handleStartTest} key="clone-end" />, // 맨 뒤 복제 → 자연스러운 Main 연결
     ];
 
     const [current, setCurrent] = useState(1);
-    const [isAnimating, setIsAnimating] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(true);
 
     const nextSlide = () => {
         if (isAnimating) return;
@@ -33,10 +46,10 @@ function Carousel({ onLoginClick }) {
         const timeout = setTimeout(() => {
             setIsAnimating(false);
 
-            if (current === slides.length - 1) {
-                setCurrent(1);
-            } else if (current === 0) {
-                setCurrent(slides.length - 2);
+            if (current === 0) {
+                setCurrent(slides.length - 2); // 앞 복제 → 마지막 원본
+            } else if (current === slides.length - 1) {
+                setCurrent(1); // 뒤 복제 → 첫 번째 원본
             }
         }, 700);
 
@@ -45,7 +58,6 @@ function Carousel({ onLoginClick }) {
 
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-white relative overflow-hidden">
-            {/* ✅ 홈에서는 홈버튼 숨김 */}
             <TopRightMenu onLoginClick={onLoginClick} showHomeButton={false} />
 
             <div className="w-[133vh] h-[133vh] rounded-full border-[7vw] border-[#f6f6f6] shadow-xl overflow-hidden flex items-center justify-center z-0 relative">
@@ -64,7 +76,7 @@ function Carousel({ onLoginClick }) {
                 </div>
             </div>
 
-            {/* 왼쪽 화살표 버튼 */}
+            {/* 왼쪽 화살표 */}
             <button
                 onClick={prevSlide}
                 className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-[calc(50%+calc(67.5px+60vh))]
@@ -74,7 +86,7 @@ function Carousel({ onLoginClick }) {
                 <ChevronLeft className="w-24 h-24 text-blue-600" strokeWidth={3} />
             </button>
 
-            {/* 오른쪽 화살표 버튼 */}
+            {/* 오른쪽 화살표 */}
             <button
                 onClick={nextSlide}
                 className="absolute top-1/2 left-1/2 -translate-y-1/2 translate-x-[calc(50%+calc(67.5px+44vh))]

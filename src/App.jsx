@@ -4,6 +4,7 @@ import Carousel from "./components/Carousel";
 import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
 import StrokeCenter from "./components/StrokeCenter";
+import TestCarousel from "./components/TestCarousel";
 
 function App() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -44,6 +45,9 @@ function App() {
 
                 {/* ✅ 뇌졸중 센터 페이지 */}
                 <Route path="/stroke-center" element={<StrokeCenter />} />
+
+                {/* ✅ 검사 캐러셀 페이지 */}
+                <Route path="/test" element={<TestCarousel />} />
             </Routes>
         </Router>
     );
