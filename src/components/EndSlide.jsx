@@ -19,7 +19,7 @@ export default function EndSlide() {
             }`}
         >
             {/* 타이틀 */}
-            <h1 className="text-9xl font-bold text-gray-400 mb-2">F.A.S.T</h1>
+            <h1 className="text-9xl font-bold text-blue-600 mb-2">F.A.S.T</h1>
             <p className="text-3xl text-black mb-14">Brain Scan</p>
 
             {/* 본문 */}
